@@ -1,0 +1,19 @@
+{
+	"eng" : {
+		"page-title" : "Maxime Cote - Front-end Web Developer",
+		"navbar-header" : "Maxime Cote | Front-end Web Developer",
+		"navbar-link1" : "Home",
+		"navbar-link2" : "Articles",
+		"navbar-link3" : "About me",
+		"navbar-link4" : "Contact",
+		"footer-name" : "Maxime Cote @ 2016",
+		"footer-follow-me" : "Follow me : ",
+		"social-media-link1" : "Facebook", 
+		"social-media-link2" : "LinkedIn",
+		"social-media-link3" : "GitHub",
+		"home-pretitle" : "Hello, my name is",
+		"home-name" : "Maxime Cote",
+		"home-subtitle1" : "I'm a front-end web developer, based in Montreal, Canada.",
+		"home-subtitle2" : "I'm currently working at <a target=\"_blank\" href=\"https://myevent.com\">MyEvent.com</a>."
+	}
+}
