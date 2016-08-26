@@ -65,8 +65,9 @@ function initBackbone(articles) {
 			this.render();
 		},
 		render: function() {
+            this.$el.html(_.template($('#template_articles').html(), {}));
 			App.articlesCollection.each(function(item) {
-				$('.js-list-of-selectors').append(new ArticleSelectorView(item));
+                $('.js-list-of-selectors').append(new ArticleSelectorView(item).$el);
 			})	
 		}
 	});
@@ -89,8 +90,8 @@ function initBackbone(articles) {
 			this.render(item);
 		},
 		render: function(item) {
-			debugger;
-			this.$el.html(_.template($('#template_article_selector'), item));
+            var item = item.attributes[App.options.lang];
+			this.$el.html(_.template($('#template_article_selector').html())(item));
 		}
 	});
 
