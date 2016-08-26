@@ -90,8 +90,7 @@ function initBackbone(articles) {
 			this.render(item);
 		},
 		render: function(item) {
-            var item = item.attributes[App.options.lang];
-			this.$el.html(_.template($('#template_article_selector').html())(item));
+			this.$el.html(_.template($('#template_article_selector').html())(item.toJSON()));
 		}
 	});
 
@@ -107,5 +106,5 @@ function initBackbone(articles) {
 
 function updateHeader() {
 	var currentView = Backbone.history.getFragment() === "" ? App.options.defaultView : Backbone.history.getFragment();
-	$('li a').removeClass('active').filter('[data-view="' + currentView + '"]').parent().addClass('active');
+	$('li').removeClass('active').filter('[data-view="' + currentView + '"]').addClass('active');
 }
