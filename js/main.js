@@ -2,9 +2,9 @@ $(document).ready(function() {
 
 	App = {};
 	App.options = {
-		'lang' : 'eng'
-	}
-	App.currentView = "home";
+		'lang' : 'eng',
+        'defaultView' : 'home'
+	};
 
 	$.get('data/strings.json', function(data) {
 		App.strings = data;
@@ -18,7 +18,7 @@ function initStrings() {
 
 	$('[data-string]').each(function() {
 		$(this).html(App.strings[App.options.lang][$(this).attr('data-string')]);
-	})
+	});
 
 }
 
@@ -92,7 +92,7 @@ function initBackbone(articles) {
 			debugger;
 			this.$el.html(_.template($('#template_article_selector'), item));
 		}
-	})
+	});
 
 	App.router = new ApplicationRouter();
 	
@@ -104,6 +104,7 @@ function initBackbone(articles) {
 	
 }
 
-function updateHeader() {	
-	$('li a').removeClass('active').filter('[data-view="' + Backbone.history.getFragment() + '"]').parent().addClass('active');
+function updateHeader() {
+	var currentView = Backbone.history.getFragment() === "" ? App.options.defaultView : Backbone.history.getFragment();
+	$('li a').removeClass('active').filter('[data-view="' + currentView + '"]').parent().addClass('active');
 }

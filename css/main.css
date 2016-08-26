@@ -19,8 +19,19 @@ body{
 	padding-top: 120px;
 }
 
+.container .jumbotron{
+	padding-left: 30px;
+	right: 30px;
+}
+
 .navbar{
 	min-height: 0px;
+}
+
+@media screen and (max-width: 992px) {
+    .navbar__container{
+        width: 100%;
+    }
 }
 
 .navbar-inverse .navbar-brand{
@@ -54,7 +65,7 @@ body{
 }
 
 
-@media screen and (min-height: 768px) {
+@media screen and (min-width: 768px) {
 	.img-text{
 		font-size: 0px;
 	}
@@ -68,6 +79,12 @@ body{
 	}	
 }
 
+@media screen and (max-width: 1199px) {
+    .img-text__img {
+        display: none;
+    }
+}
+
 .title{
 	font-weight: bold;
 }
@@ -79,6 +96,41 @@ body{
 	}
 }
 
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .home.container{
+        width: 768px;
+    }
+}
+
+@media screen  and (max-width: 767px){
+    .navbar-inverse .navbar-brand{
+        font-size: 12px;
+        padding: 16px 10px;
+    }
+
+    .home__pre-title{
+        margin-bottom: 10px;
+    }
+
+    .home__title{
+        font-size: 36px;
+    }
+
+    .home__post-title{
+        margin-top: 15px;
+        font-size: 20px;
+    }
+    .img-text__img {
+        display: block;
+        margin: auto;
+        margin-bottom: 30px;
+    }
+
+    .img-text__img img {
+        border-radius: 5px!important;
+    }
+
+}
 .home h3{
 	margin-bottom: 3px;
 }
@@ -86,7 +138,6 @@ body{
 .home h3:last-child{
 	margin-bottom: 0px;
 }
-
 
 
 
