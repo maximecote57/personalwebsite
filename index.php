@@ -9,8 +9,8 @@
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
-        
-        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
@@ -19,6 +19,8 @@
         <!-- templates -->
         <?php require_once('views/home.html'); ?>
         <?php require_once('views/articles.html'); ?>
+        <?php require_once('views/aboutme.html'); ?>
+        <?php require_once('views/contact.html'); ?>
 
         <?php require_once('views/header.html'); ?>
 
@@ -29,6 +31,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>        
         <script src="js/main.js"></script>

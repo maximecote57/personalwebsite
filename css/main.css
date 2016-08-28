@@ -11,12 +11,28 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0px;
 }
 
+ul, li{
+    list-style-type: none;
+}
+
 h3{
 	font-size: 22px;
 }
 
+textarea{
+    resize: none;
+}
+
+.panel-body{
+    padding: 0px;
+}
+
 body{
 	padding-top: 120px;
+}
+
+.container__small{
+    max-width: 767px;
 }
 
 .container .jumbotron{
@@ -26,6 +42,16 @@ body{
 
 .navbar{
 	min-height: 0px;
+}
+
+.link-cover{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    z-index: 1000;
 }
 
 @media screen and (max-width: 992px) {
@@ -62,6 +88,48 @@ body{
 
 .spacer-vertical-bar{
 	margin: 0px 15px;
+}
+
+.list-of-selectors__selector{
+    cursor: pointer;
+    padding: 15px;
+    border-bottom: solid 1px #cecece;
+    position: relative;
+}
+
+.list-of-selectors__selector.active{
+    background-color: #f9f9f9;
+}
+
+.list-of-selectors__selector:hover{
+     background: #eaeaea;
+    -webkit-transition: background 0.3s;
+    -moz-transition: background 0.3s;
+    -ms-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
+ }
+
+.list-of-articles__article{
+    margin-bottom: 30px;
+}
+
+
+.article__date{
+    margin-bottom: 30px;
+}
+
+.aboutme{
+    text-align: center;
+}
+
+.aboutme__item{
+    margin-bottom: 30px;
+    font-size: 17px;
+}
+
+.form__group{
+    margin-bottom: 30px;
 }
 
 
@@ -129,6 +197,15 @@ body{
     .img-text__img img {
         border-radius: 5px!important;
     }
+    .social-media-links{
+        display: block;
+    }
+
+    .navbar-nav li a{
+        font-size: 12px;
+        padding: 10px;
+    }
+
 
 }
 .home h3{
@@ -138,6 +215,17 @@ body{
 .home h3:last-child{
 	margin-bottom: 0px;
 }
+
+
+.btn-primary{
+    background-color: #505050;
+}
+
+.btn-primary:hover{
+    background-color: black;
+}
+
+
 
 
 

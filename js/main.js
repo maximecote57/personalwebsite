@@ -28,18 +28,19 @@ function initBackbone(articles) {
 	    routes: {
 	    	"" : "home",
 			"home": "home",
-			"articles": "articles",
+            "articles": "articles",
+            "articles/:articleId": "articles",
 			"aboutme": "aboutme",
 			"contact": "contact"
 	    },
 	    home: function() {
 	    	new DefaultView('#template_home');
 	    },
-	    articles: function() {
+	    articles: function(articleId) {
 	    	App.articlesCollection = new ArticlesCollection();
 			App.articlesCollection.fetch({
 				success : function() {
-					new ArticlesView();
+					new ArticlesView(articleId);
 					initStrings();
 				}
 			});
@@ -56,19 +57,28 @@ function initBackbone(articles) {
 
 	var ArticlesCollection = Backbone.Collection.extend({
 		model : ArticleModel,
-		url : 'data/articles.json'
+		url : 'data/articles.json',
+        comparator: function(a, b) {
+            return -a.get('date').localeCompare(b.get('date'));
+        }
 	});
 
 	var ArticlesView = Backbone.View.extend({
 		el: '.js-main-content',
-		initialize: function() {
-			this.render();
+		initialize: function(articleId) {
+			this.render(articleId);
 		},
-		render: function() {
+		render: function(articleId) {
             this.$el.html(_.template($('#template_articles').html(), {}));
-			App.articlesCollection.each(function(item) {
-                $('.js-list-of-selectors').append(new ArticleSelectorView(item).$el);
-			})	
+			App.articlesCollection.each(function(item, index) {
+				$('.js-list-of-selectors').append(new ArticleSelectorView(item).$el);
+                $('.js-list-of-articles').append(new ArticleView(item).$el);
+				if(item !== App.articlesCollection.last()) {
+					$('.js-list-of-articles').append('<hr>');
+				}
+			});
+            updateArticlesSelectors(articleId);
+			makeArticlesSelectorsFixed();
 		}
 	});
 
@@ -85,20 +95,42 @@ function initBackbone(articles) {
 
 	var ArticleSelectorView = Backbone.View.extend({
 		tagName : 'li',
-		className : 'clearfix',
+		className : 'clearfix list-of-selectors__selector',
+		events: {
+			'click' : function() {
+				$('html, body').animate({
+					scrollTop : $('.js-article[data-article-id="' + this.$el.attr('data-article-id') + '"]').offset().top - $('#navbar').height() - 15
+				}, 500, 'easeOutCubic');
+			}
+		},
 		initialize: function(item) {
 			this.render(item);
 		},
 		render: function(item) {
 			this.$el.html(_.template($('#template_article_selector').html())(item.toJSON()));
+            this.$el.attr('data-article-id', item.get('id'));
 		}
 	});
+
+    var ArticleView = Backbone.View.extend({
+        tagName : 'li',
+        className : 'clearfix list-of-articles__article js-article',
+        initialize: function(item) {
+            this.render(item);
+        },
+        render: function(item) {
+            this.$el.html(_.template($('#template_article').html())(item.toJSON()));
+			this.$el.attr('data-article-id', item.get('id'));
+			this.$el.attr('id', 'article-' + item.get('id'));
+        }
+    });
 
 	App.router = new ApplicationRouter();
 	
 	Backbone.history.start();
 
 	App.router.on('route', function() {
+		console.log('route change');
 		updateHeader();
 	});
 	
@@ -106,5 +138,24 @@ function initBackbone(articles) {
 
 function updateHeader() {
 	var currentView = Backbone.history.getFragment() === "" ? App.options.defaultView : Backbone.history.getFragment();
-	$('li').removeClass('active').filter('[data-view="' + currentView + '"]').addClass('active');
+    if(currentView.indexOf('articles') !== -1) {
+        currentView = "articles";
+    }
+	$('.navbar-nav li').removeClass('active').filter('[data-view="' + currentView + '"]').addClass('active');
+}
+
+function updateArticlesSelectors(articleId) {
+    var articleId = articleId || App.articlesCollection.first().get('id');
+    $('.js-list-of-selectors li').removeClass('active').filter('[data-article-id="' + articleId + '"]').addClass('active');
+}
+
+function makeArticlesSelectorsFixed() {
+	var articlesSelectors = $('.js-articles-selectors').clone(true);
+	articlesSelectors.css({
+		'position' : 'fixed',
+		'top' : $('.js-articles-selectors').offset().top,
+		'left' : $('.js-articles-selectors').offset().left,
+		'width' : $('.js-articles-selectors').outerWidth()
+	});
+	$('.js-articles-selectors').css('visibility', 'hidden').after(articlesSelectors);
 }
