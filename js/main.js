@@ -192,10 +192,10 @@ function sendEmail() {
 	data.message = $('.js-contact-message').val();
 
 	$.post('email-sender.php', data,  function(a, b, c) {
-		var $screenCover = $('<div class="screen-cover hide-this"><p class="screen-cover__message">Email correctly sent ! <br> We\'ll be in touch. :)</p></div>');
+		var $screenCover = $('<div class="screen-cover hide-this"><i class="screen-cover__btn-close fa fa-times js-screen-cover-btn-close" aria-hidden="true"></i><p class="screen-cover__message">Email correctly sent ! <br> We\'ll be in touch. :)</p></div>');
 		$('body').append($screenCover);
 		$screenCover.fadeIn(500, function() {
-			$screenCover.click(function() {
+			$('.js-screen-cover-btn-close').click(function() {
 				window.location.href = App.options.homeUrl;
 			});
 		});
