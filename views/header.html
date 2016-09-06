@@ -13,7 +13,13 @@
       <a class="navbar-brand" href="#" data-string="navbar-header"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right visible-xs">
+        <li data-toggle="collapse" data-target=".navbar-collapse" data-view="home"><a href="#home" data-string="navbar-link1"></a></li>
+        <li data-toggle="collapse" data-target=".navbar-collapse" data-view="articles"><a href="#articles" data-string="navbar-link2"></a></li>
+        <li data-toggle="collapse" data-target=".navbar-collapse" data-view="aboutme"><a href="#aboutme" data-string="navbar-link3"></a></li>
+        <li data-toggle="collapse" data-target=".navbar-collapse" data-view="contact"><a href="#contact" data-string="navbar-link4"></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right hidden-xs">
         <li data-view="home"><a href="#home" data-string="navbar-link1"></a></li>
         <li data-view="articles"><a href="#articles" data-string="navbar-link2"></a></li>
         <li data-view="aboutme"><a href="#aboutme" data-string="navbar-link3"></a></li>

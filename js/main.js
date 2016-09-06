@@ -82,11 +82,6 @@ function initBackbone(articles) {
 			if($(window).width() > 767) {
 				makeArticlesSelectorsFixed();
 			}
-			$('p').each(function() {
-				var $this = $(this);
-				if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
-					$this.remove();
-			});
 		}
 	});
 
@@ -110,7 +105,7 @@ function initBackbone(articles) {
 		events: {
 			'click' : function() {
 				$('html, body').animate({
-					scrollTop : $('.js-article[data-article-id="' + this.$el.attr('data-article-id') + '"]').offset().top - $('.js-navbar').height() - 2
+					scrollTop : $('.js-article[data-article-id="' + this.$el.attr('data-article-id') + '"]').offset().top - $('.js-navbar').height() - 20
 				}, 500, 'easeOutCubic');
 			}
 		},

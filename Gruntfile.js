@@ -49,6 +49,11 @@ module.exports = function(grunt) {
         },
 
         uglify: {
+            options: {
+                compress: {
+                    drop_debugger: false
+                }
+            },
             dist: {
                 files: {
                     'js/main.min.js': ['js/main.js']
