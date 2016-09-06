@@ -7,5 +7,6 @@
     <orderEntry type="library" name="underscore" level="application" />
     <orderEntry type="library" name="backbone" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="validator" level="application" />
   </component>
 </module>

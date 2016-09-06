@@ -3,7 +3,8 @@ $(document).ready(function() {
 	App = {};
 	App.options = {
 		'lang' : 'eng',
-        'defaultView' : 'home'
+        'defaultView' : 'home',
+		'homeUrl' : window.location.origin + window.location.pathname
 	};
 
 	$.get('data/strings.json', function(data) {
@@ -11,7 +12,6 @@ $(document).ready(function() {
 		initBackbone();
 		updateHeader();
 	});
-	
 });
 
 function initStrings() {
@@ -50,6 +50,7 @@ function initBackbone(articles) {
 	    },
 	    contact: function() {
 	    	new DefaultView('#template_contact');
+			$('.js-contact-form').validator()
 	    }
 	});
 
@@ -78,7 +79,14 @@ function initBackbone(articles) {
 				}
 			});
             updateArticlesSelectors(articleId);
-			makeArticlesSelectorsFixed();
+			if($(window).width() > 767) {
+				makeArticlesSelectorsFixed();
+			}
+			$('p').each(function() {
+				var $this = $(this);
+				if($this.html().replace(/\s|&nbsp;/g, '').length == 0)
+					$this.remove();
+			});
 		}
 	});
 
@@ -88,7 +96,10 @@ function initBackbone(articles) {
 			this.render(templateId);
 		},
 		render: function(templateId) {
-			this.$el.html(_.template($(templateId).html(), {}));
+			this.$el
+				.hide()
+				.html(_.template($(templateId).html(), {}))
+				.fadeIn(500);
 			initStrings();
 		}
 	});
@@ -99,7 +110,7 @@ function initBackbone(articles) {
 		events: {
 			'click' : function() {
 				$('html, body').animate({
-					scrollTop : $('.js-article[data-article-id="' + this.$el.attr('data-article-id') + '"]').offset().top - $('#navbar').height() - 15
+					scrollTop : $('.js-article[data-article-id="' + this.$el.attr('data-article-id') + '"]').offset().top - $('.js-navbar').height() - 2
 				}, 500, 'easeOutCubic');
 			}
 		},
@@ -114,12 +125,15 @@ function initBackbone(articles) {
 
     var ArticleView = Backbone.View.extend({
         tagName : 'li',
-        className : 'clearfix list-of-articles__article js-article',
+        className : 'list-of-articles__article article clearfix js-article',
         initialize: function(item) {
             this.render(item);
         },
         render: function(item) {
-            this.$el.html(_.template($('#template_article').html())(item.toJSON()));
+            this.$el
+				.hide()
+				.html(_.template($('#template_article').html())(item.toJSON()))
+				.fadeIn(500);
 			this.$el.attr('data-article-id', item.get('id'));
 			this.$el.attr('id', 'article-' + item.get('id'));
         }
@@ -130,32 +144,61 @@ function initBackbone(articles) {
 	Backbone.history.start();
 
 	App.router.on('route', function() {
-		console.log('route change');
 		updateHeader();
+		window.scrollTo(0, 0)
 	});
 	
 }
 
 function updateHeader() {
+
 	var currentView = Backbone.history.getFragment() === "" ? App.options.defaultView : Backbone.history.getFragment();
-    if(currentView.indexOf('articles') !== -1) {
+
+	if(currentView.indexOf('articles') !== -1) {
         currentView = "articles";
     }
+
 	$('.navbar-nav li').removeClass('active').filter('[data-view="' + currentView + '"]').addClass('active');
 }
 
 function updateArticlesSelectors(articleId) {
+
     var articleId = articleId || App.articlesCollection.first().get('id');
+
     $('.js-list-of-selectors li').removeClass('active').filter('[data-article-id="' + articleId + '"]').addClass('active');
+
 }
 
 function makeArticlesSelectorsFixed() {
+
 	var articlesSelectors = $('.js-articles-selectors').clone(true);
+
 	articlesSelectors.css({
 		'position' : 'fixed',
 		'top' : $('.js-articles-selectors').offset().top,
 		'left' : $('.js-articles-selectors').offset().left,
 		'width' : $('.js-articles-selectors').outerWidth()
 	});
+
 	$('.js-articles-selectors').css('visibility', 'hidden').after(articlesSelectors);
+}
+
+function sendEmail() {
+
+	var data = {};
+
+	data.name = $('.js-contact-name').val();
+	data.email = $('.js-contact-email').val();
+	data.message = $('.js-contact-message').val();
+
+	$.post('email-sender.php', data,  function(a, b, c) {
+		var $screenCover = $('<div class="screen-cover hide-this"><p class="screen-cover__message">Email correctly sent ! <br> We\'ll be in touch. :)</p></div>');
+		$('body').append($screenCover);
+		$screenCover.fadeIn(500, function() {
+			$screenCover.click(function() {
+				window.location.href = App.options.homeUrl;
+			});
+		});
+	});
+
 }

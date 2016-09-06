@@ -1,0 +1,20 @@
+.list-of-selectors{
+    &__selector{
+        cursor: pointer;
+        padding: 15px;
+        border-bottom: solid 1px #cecece;
+        position: relative;
+        &.active{
+            background-color: #f9f9f9;
+        }
+        &:hover{
+            background: #eaeaea;
+            .transition(0.3s);
+        }
+    }
+    @media screen  and (max-width: 767px){
+        &__panel{
+            margin-bottom: 30px;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+.panel-body{
+    padding: 0px;
+}
+
+.btn-primary, .btn-primary.disabled{
+    background-color: #505050;
+}
+
+.btn-primary:hover{
+    background-color: black;
+}
+
+.container{
+    &__small{
+        max-width: 767px;
+    }
+    .jumbotron{
+        padding-left: 30px;
+        right: 30px;
+    }
+}
+
+.form-group{
+    margin-bottom: 30px;
+}
+
+.navbar{
+    min-height: 0px;
+    li a{
+        font-size: 18px;
+        padding: 20px 15px;
+        @media screen  and (min-width: 768px) and (max-width: 1199px) {
+            font-size: 16px;
+        }
+        @media screen  and (max-width: 767px){
+            font-size: 12px;
+            padding: 10px;
+        }
+
+    }
+    .navbar-brand{
+        font-weight: bold;
+        color: white;
+        font-size: 18px;
+        padding: 20px;
+        @media screen  and (max-width: 767px){
+            font-size: 12px;
+            padding: 16px 10px;
+        }
+    }
+}
+

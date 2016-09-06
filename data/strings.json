@@ -14,6 +14,10 @@
 		"home-pretitle" : "Hello, my name is",
 		"home-name" : "Maxime Cote",
 		"home-subtitle1" : "I'm a front-end web developer, based in Montreal, Canada.",
-		"home-subtitle2" : "I'm currently working at <a target=\"_blank\" href=\"https://myevent.com\">MyEvent.com</a>."
+		"home-subtitle2" : "I'm currently working at <a target=\"_blank\" href=\"https://myevent.com\">MyEvent.com</a>.",
+		"contact-lbl-name" : "What's your name ?",
+		"contact-lbl-email" : "What's your email ?",
+		"contact-lbl-message" : "What's your message ?",
+		"btn-send" : "Send"
 	}
 }

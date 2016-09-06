@@ -1,0 +1,31 @@
+.home{
+    @media screen and (min-width: 1200px) {
+        width: 992px;
+    }
+    @media screen and (min-width: 992px) and (max-width: 1199px) {
+        width: 768px;
+    }
+    @media screen and (max-width: 767px){
+        &__pre-title{
+            margin-bottom: 10px;
+        }
+
+        &__title{
+            font-size: 36px;
+        }
+
+        &__post-title{
+            margin-top: 15px;
+            font-size: 20px;
+        }
+    }
+    &__title{
+        margin-bottom: 3px;
+    }
+    &__post-title{
+        margin-bottom: 3px;
+        &--last{
+            margin-bottom: 0px;
+        }
+    }
+}
